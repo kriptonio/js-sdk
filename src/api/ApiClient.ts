@@ -1,7 +1,7 @@
 import axios, { AxiosError, Method } from 'axios';
 import { Configuration } from '../Configuration';
 import { ApiErrorModel } from '../model/ApiErrorModel';
-import { ApiErrorResponse } from '../types/apiErrorResponse';
+import { ApiErrorResponse } from '../types/api/apiErrorResponse';
 
 export type IHttpOkResponse<R> = {
   ok: true;
@@ -69,11 +69,11 @@ export class ApiClient {
       };
     } catch (error) {
       const axiosError = error as AxiosError<ApiErrorResponse>;
-      if (axiosError.response?.status) {
+      if (axiosError.response?.status && axiosError.response?.data) {
         return {
           ok: false,
           httpStatusCode: axiosError.response.status,
-          error: ApiErrorModel.from(axiosError),
+          error: ApiErrorModel.from(axiosError.response.data),
         };
       }
 

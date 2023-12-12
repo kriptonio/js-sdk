@@ -1,7 +1,7 @@
 import { KriptonioSigner } from './Signer';
 import { ApiClient } from './api/ApiClient';
 import { WalletApi } from './api/WalletApi';
-import { CreateWalletBody } from './types/createWalletBody';
+import { CreateWalletBody } from './types/api/createWalletBody';
 
 export interface WalletSignerOptions {
   walletId: string;

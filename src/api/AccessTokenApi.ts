@@ -1,6 +1,6 @@
 import { KriptonioError } from '../Error';
 import { AccessTokenDto } from '../response/AccessTokenDto';
-import { AccessTokenResponse } from '../types/accessTokenResponse';
+import { AccessTokenResponse } from '../types/api/accessTokenResponse';
 import { ApiClient } from './ApiClient';
 
 export class AccessTokenApi {

@@ -1,4 +1,4 @@
-import { WalletType } from '../types/walletType';
+import { WalletType } from '../types/api/walletType';
 
 export interface WalletDto {
   id: string;

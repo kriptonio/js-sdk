@@ -1,6 +1,6 @@
 import { KriptonioError } from '../Error';
 import { SmartContractDto } from '../response/SmartContractDto';
-import { SmartContractDetailResponse } from '../types/smartContractDetailResponse';
+import { SmartContractDetailResponse } from '../types/api/smartContractDetailResponse';
 import { ApiClient } from './ApiClient';
 
 export class SmartContractApi {

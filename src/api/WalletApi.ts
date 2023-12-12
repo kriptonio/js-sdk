@@ -1,7 +1,7 @@
 import { KriptonioError } from '../Error';
 import { WalletDto } from '../response/WalletDto';
-import { CreateWalletBody } from '../types/createWalletBody';
-import { WalletResponse } from '../types/walletResponse';
+import { CreateWalletBody } from '../types/api/createWalletBody';
+import { WalletResponse } from '../types/api/walletResponse';
 import { AccessTokenApi } from './AccessTokenApi';
 import { ApiClient } from './ApiClient';
 

@@ -1,5 +1,5 @@
 interface ErrorInfo {
-  rpcCode?: number;
+  code?: number;
   message?: string;
 }
 
@@ -8,6 +8,6 @@ export class KriptonioError extends Error {
 
   constructor(error: ErrorInfo) {
     super(error.message);
-    this.rpcCode = error.rpcCode;
+    this.rpcCode = error.code;
   }
 }

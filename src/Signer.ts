@@ -5,8 +5,8 @@ import { KriptonioError } from './Error';
 import { ApiClient } from './api/ApiClient';
 import { WalletApi } from './api/WalletApi';
 import { WalletDto } from './response/WalletDto';
-import { JsonRpcResponse } from './types/jsonRpcResponse';
-import { WalletType } from './types/walletType';
+import { JsonRpcResponse } from './types/api/jsonRpcResponse';
+import { WalletType } from './types/api/walletType';
 
 export interface SignerOptions {
   walletId: string;
@@ -291,7 +291,7 @@ export class KriptonioSigner extends ethers.AbstractSigner<ethers.JsonRpcProvide
     if (response.ok) {
       if (response.data.error) {
         throw new KriptonioError({
-          rpcCode: response.data.error.code,
+          code: response.data.error.code,
           message: response.data.error.message ?? undefined,
         });
       }

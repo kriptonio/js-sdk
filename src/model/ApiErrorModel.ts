@@ -1,48 +1,65 @@
-import { AxiosError } from 'axios';
-import { ApiErrorResponse } from '../types/apiErrorResponse';
-import { ErrorCode } from '../types/errorCode';
+import { ApiErrorCode } from '../types/api/apiErrorCode';
+import { ApiErrorResponse } from '../types/api/apiErrorResponse';
+import { ExternalServiceError } from '../types/api/externalServiceError';
 
 export class ApiErrorModel {
-  public httpStatusCode: number | null = null;
+  public message: string | null = null;
 
-  public details: string | null = null;
+  public code: ApiErrorCode | null = null;
 
-  public code: ErrorCode | null = null;
-
-  public subCode: string | null = null;
-
-  public hasCodeOrSubCode = (code: ErrorCode): boolean => {
-    return this.code === code || this.subCode === code;
-  };
+  private cause: ExternalServiceError | null = null;
 
   public stringify = (): string => {
-    let code = this.code ?? '';
-    if (this.subCode) {
-      code = `${code}.${this.subCode}`;
+    const parts: string[] = [];
+
+    if (this.code) {
+      parts.push(`[${this.code}]`);
     }
 
-    if (this.details && !code) {
-      return this.details;
+    if (this.message) {
+      parts.push(this.message);
     }
 
-    if (code && !this.details) {
-      return code;
+    const rootCause = this.getRootCause(this.cause);
+    if (rootCause) {
+      parts.push('caused by');
+
+      if (rootCause.code) {
+        parts.push(`[${rootCause.code}]`);
+      }
+
+      if (rootCause.message) {
+        parts.push(rootCause.message);
+      }
     }
 
-    if (this.code && this.details) {
-      return `${this.details} (Code: ${code})`;
-    }
-
-    return this.httpStatusCode?.toString() ?? '';
+    return parts.join(' ');
   };
 
-  public static from = (error: AxiosError<ApiErrorResponse>) => {
+  public get rootCause(): ExternalServiceError | null {
+    return this.getRootCause(this.cause);
+  }
+
+  private getRootCause = (
+    error: ExternalServiceError | null
+  ): ExternalServiceError | null => {
+    if (!error) {
+      return null;
+    }
+
+    if (error.cause) {
+      return this.getRootCause(error.cause);
+    }
+
+    return error;
+  };
+
+  public static from = (dto: ApiErrorResponse) => {
     const model = new ApiErrorModel();
 
-    model.httpStatusCode = error.response?.status ?? null;
-    model.details = error.response?.data?.details ?? null;
-    model.code = error.response?.data?.code ?? null;
-    model.subCode = error.response?.data?.subCode ?? null;
+    model.message = dto.message ?? null;
+    model.code = dto.code;
+    model.cause = dto.cause ?? null;
 
     return model;
   };
