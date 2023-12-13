@@ -293,6 +293,7 @@ export class KriptonioSigner extends ethers.AbstractSigner<ethers.JsonRpcProvide
         throw new KriptonioError({
           code: response.data.error.code,
           message: response.data.error.message ?? undefined,
+          cause: response.data.error.data?.cause ?? undefined,
         });
       }
 

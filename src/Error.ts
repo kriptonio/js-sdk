@@ -1,6 +1,7 @@
 interface ErrorInfo {
   code?: number;
   message?: string;
+  cause?: ErrorInfo;
 }
 
 export class KriptonioError extends Error {
@@ -9,5 +10,6 @@ export class KriptonioError extends Error {
   constructor(error: ErrorInfo) {
     super(error.message);
     this.code = error.code;
+    this.cause = error.cause;
   }
 }
