@@ -4,10 +4,10 @@ interface ErrorInfo {
 }
 
 export class KriptonioError extends Error {
-  public rpcCode: number | undefined;
+  public code: number | undefined;
 
   constructor(error: ErrorInfo) {
     super(error.message);
-    this.rpcCode = error.code;
+    this.code = error.code;
   }
 }
