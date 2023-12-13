@@ -6,6 +6,7 @@ interface ErrorInfo {
 
 export class KriptonioError extends Error {
   public code: number | undefined;
+  public cause: ErrorInfo | undefined;
 
   constructor(error: ErrorInfo) {
     super(error.message);
