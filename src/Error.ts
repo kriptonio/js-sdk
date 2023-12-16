@@ -1,3 +1,5 @@
+import { JsonRpcError } from './types/api/jsonRpcError';
+
 interface ErrorInfo {
   code?: number;
   message?: string;
@@ -6,11 +8,24 @@ interface ErrorInfo {
 
 export class KriptonioError extends Error {
   public code: number | undefined;
-  public cause: ErrorInfo | undefined;
+  public cause: KriptonioError | undefined;
 
-  constructor(error: ErrorInfo) {
+  public constructor(error: ErrorInfo) {
     super(error.message);
     this.code = error.code;
-    this.cause = error.cause;
+
+    if (error.cause) {
+      this.cause = new KriptonioError(error.cause);
+    }
   }
+
+  public static fromJsonRpcError = (error: JsonRpcError): KriptonioError => {
+    return new KriptonioError({
+      code: error.code,
+      message: error.message ?? undefined,
+      cause: error.data?.cause
+        ? KriptonioError.fromJsonRpcError(error.data.cause)
+        : undefined,
+    });
+  };
 }
