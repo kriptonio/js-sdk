@@ -1,10 +1,10 @@
+import { BlockchainDto } from './BlockchainDto';
+
 export interface SmartContractDto {
   id: string;
   title: string;
   abi: string;
-  blockchain: {
-    chainId: number;
-  };
+  blockchain: BlockchainDto;
   wallet: {
     id: string;
   };

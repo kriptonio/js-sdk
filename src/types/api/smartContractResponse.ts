@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { BlockchainResponse } from './blockchainResponse';
 import type { SmartContractType } from './smartContractType';
 
 
@@ -17,7 +16,7 @@ export interface SmartContractResponse {
     id: string;
     title: string;
     type: SmartContractType;
-    blockchain: BlockchainResponse;
+    blockchainId: string;
     isDeployed: boolean;
     createdAt: string;
 }

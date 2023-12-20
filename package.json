@@ -1,12 +1,12 @@
 {
   "name": "@kriptonio/sdk",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Kriptonio JS SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": false,
   "scripts": {
-    "playground": "ts-node ./test/playground.ts",
+    "playground": "ts-node ./playground/playground.ts",
     "build": "tsc",
     "lint": "eslint src",
     "prepublish": "yarn build"

@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { OrganizationResponse } from './organizationResponse';
 import type { WalletType } from './walletType';
 import type { WalletPaymasterResponse } from './walletPaymasterResponse';
 
@@ -21,7 +20,7 @@ export interface WalletResponse {
     type: WalletType;
     color: string;
     paymasterEnabled: boolean;
-    organization: OrganizationResponse;
+    organizationId: string;
     paymasters?: Array<WalletPaymasterResponse> | null;
     createdAt: string;
 }

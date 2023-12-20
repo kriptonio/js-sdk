@@ -19,7 +19,9 @@ export class KriptonioClient {
       apiUrl?: string;
     }
   ) => {
-    this.#apiClient.setAuthentication(config);
+    if (config.accessToken || config.sessionToken) {
+      this.#apiClient.setAuthentication(config);
+    }
 
     if (config.apiUrl) {
       Configuration.apiUrl = config.apiUrl;

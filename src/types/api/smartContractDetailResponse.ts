@@ -12,7 +12,6 @@
 import type { WalletResponse } from './walletResponse';
 import type { SmartContractDeploymentResponse } from './smartContractDeploymentResponse';
 import type { SmartContractTemplateResponse } from './smartContractTemplateResponse';
-import type { BlockchainResponse } from './blockchainResponse';
 import type { SmartContractType } from './smartContractType';
 
 
@@ -26,7 +25,8 @@ export interface SmartContractDetailResponse {
     templateInput: any | null;
     type: SmartContractType;
     abi: string;
-    blockchain: BlockchainResponse;
+    blockchainId: string;
+    organizationId: string;
     wallet: WalletResponse;
     deployment?: SmartContractDeploymentResponse;
     createdAt: string;
